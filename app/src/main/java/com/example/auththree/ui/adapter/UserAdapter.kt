@@ -22,5 +22,6 @@ class UserAdapter(private val users: List<User>) :
         val user = users[position]
         holder.binding.txtId.text = user.id.toString()
         holder.binding.txtName.text = user.name
+        holder.binding.txtEmail.text = user.email
     }
 }

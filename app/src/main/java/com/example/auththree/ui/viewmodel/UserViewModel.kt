@@ -14,6 +14,11 @@ class UserViewModel : ViewModel() {
     val users: LiveData<List<User>> get() = _users
 
     fun fetchUsers() {
-        _users.value = repository.getUsers()
+//        _users.value = repository.getUsers()
+        repository.getUsers(_users)
     }
 }
+
+
+
+
