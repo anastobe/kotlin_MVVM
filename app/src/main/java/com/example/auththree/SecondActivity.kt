@@ -1,20 +1,35 @@
 package com.example.auththree
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.auththree.databinding.ActivitySecondBinding
+import com.example.auththree.ui.adapter.UserAdapter
+import com.example.auththree.ui.viewmodel.UserViewModel
 
-class SecondActivity : AppCompatActivity() {
+
+class SecondActivity : ComponentActivity() {
+
+    private lateinit var binding: ActivitySecondBinding
+    private val userViewModel: UserViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second)
 
-//        val setName = findViewById<TextView>(R.id.setName)
-//        val name = intent.getStringExtra("name")
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
 
-//        Log.d("SecondActivity", "Received name: $name")
+        binding = ActivitySecondBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-//        setName.text = name ?: "No Name Provided" // ✅ Handle null case
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
+        userViewModel.users.observe(this) { userList ->
+            binding.recyclerView.adapter = UserAdapter(userList)
+        }
+
+        userViewModel.fetchUsers()
     }
 }
+
