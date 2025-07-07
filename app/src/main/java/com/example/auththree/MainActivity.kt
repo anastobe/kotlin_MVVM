@@ -12,31 +12,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        var name = findViewById<EditText>(R.id.name)
         var button = findViewById<Button>(R.id.submit)
-//        val button = view.findViewById<Button>(R.id.submit)
+        var buttonShowTab = findViewById<Button>(R.id.buttonShowTab)
+
 
         button.setOnClickListener{
-
-//            findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
-
-
-//            if (name.text.isEmpty()){
-//                Toast.makeText(this, "Please write the name", Toast.LENGTH_SHORT).show()
-//            }
-//            else{
-
-//                val intent = Intent(this, SecondActivity::class.java)
-//                intent.putExtra("name", name.text.toString())
-//                startActivity(intent)
-
             val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
-//            finish() // closes current activity
+        }
 
-
-
-//            }
+        buttonShowTab.setOnClickListener{
+            val intent = Intent(this, ThirdActivity::class.java)
+            startActivity(intent)
         }
 
     }
