@@ -1,13 +1,14 @@
 package com.example.auththree
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.auththree.data.local.SessionManager
 import com.example.auththree.databinding.ActivitySecondBinding
 import com.example.auththree.ui.adapter.UserAdapter
 import com.example.auththree.ui.viewmodel.UserViewModel
-
 
 class SecondActivity : ComponentActivity() {
 
@@ -17,12 +18,18 @@ class SecondActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        binding = ActivityMainBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-
+        // Inflate layout FIRST
         binding = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Get data from shared preferences
+        val sessionManager = SessionManager(this)
+        val loginData = sessionManager.getLoginResponse()
+
+        // ✅ Use view binding
+        binding.nameTextView.text = "Name: ${loginData?.user?.full_name}"
+
+        // Setup RecyclerView
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
         userViewModel.users.observe(this) { userList ->
@@ -32,4 +39,3 @@ class SecondActivity : ComponentActivity() {
         userViewModel.fetchUsers()
     }
 }
-
