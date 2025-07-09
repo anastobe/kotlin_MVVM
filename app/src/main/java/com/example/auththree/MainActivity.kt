@@ -24,14 +24,16 @@ class MainActivity : AppCompatActivity() {
 
         val loginIdField = findViewById<EditText>(R.id.name)
         val passwordField = findViewById<EditText>(R.id.password)
-//        val deviceIdField = "321321"
         val loginButton = findViewById<Button>(R.id.submit)
+        val buttonShowTab = findViewById<Button>(R.id.buttonShowTab)
+
+
+        buttonShowTab.setOnClickListener {
+            val intent = Intent(this, ThirdActivity::class.java)
+            startActivity(intent)
+        }
 
         loginButton.setOnClickListener {
-//            val loginId = loginIdField.text.toString()
-//            val password = passwordField.text.toString()
-//            val deviceId = "321321"
-
             val loginId = "0334334"
             val password = "91r+ciMmICk=:V739S7GOGVQKNBu5:7A4IrCxoTHZxD9iX1tJI0Q=="
             val deviceId = "321321"
@@ -57,12 +59,15 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Login Success!", Toast.LENGTH_SHORT).show()
 
                 // Navigate to next screen
-                val intent = Intent(this, SecondActivity::class.java)
+                val intent = Intent(this, ThirdActivity::class.java)
                 startActivity(intent)
 //                finish()
 
             }
                 result.onFailure {
+
+//                    val intent = Intent(this, ThirdActivity::class.java)
+//                    startActivity(intent)
 
                     Toast.makeText(this, "Login Failed: ${it.message}", Toast.LENGTH_LONG).show()
                     it.printStackTrace()  // ✅ helpful in Logcat
